@@ -20,12 +20,18 @@ void PointModel::parseFile(const char* filename)
 	// Create pointer to the xyz file
 	FILE * xyzf;
 	double d;
-	xyzf = fopen(filename, "r");
-
-	for (int count = 0; count < (xyzrows * 6); count++)
+	errno_t err = fopen_s(&xyzf, filename, "r");
+	if (err)
 	{
-		fscanf(xyzf, "%lf", &d);
-		v_xyz.push_back(d);
+		printf("Couldn't open %s.\n", filename);
+	}
+	else
+	{
+		for (int count = 0; count < (xyzrows * 6); count++)
+		{
+			fscanf_s(xyzf, "%lf", &d, sizeof(d));
+			v_xyz.push_back(d);
+		}
 	}
 }
 void PointModel::findMinMax()

@@ -114,7 +114,7 @@ void Window::displayCallback()
 }
 
 void Window::processNormalKeys(unsigned char key, int x, int y){
-	Model *currentM;
+	Model *currentM = &Globals::cube;
 	if (fkey == 1)
 		currentM = &Globals::cube;
 	else if (fkey == 2)

@@ -66,32 +66,38 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Bunny.cpp" />
-    <ClCompile Include="..\Camera.cpp" />
-    <ClCompile Include="..\cube.cpp" />
-    <ClCompile Include="..\Dragon.cpp" />
-    <ClCompile Include="..\House.cpp" />
-    <ClCompile Include="..\main.cpp" />
-    <ClCompile Include="..\Matrix4.cpp" />
-    <ClCompile Include="..\Model.cpp" />
-    <ClCompile Include="..\PointModel.cpp" />
-    <ClCompile Include="..\vector3.cpp" />
-    <ClCompile Include="..\Vector4.cpp" />
-    <ClCompile Include="..\window.cpp" />
+    <ClCompile Include="Bunny.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="cube.cpp" />
+    <ClCompile Include="Dragon.cpp" />
+    <ClCompile Include="House.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Matrix4.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="PointModel.cpp" />
+    <ClCompile Include="vector3.cpp" />
+    <ClCompile Include="Vector4.cpp" />
+    <ClCompile Include="window.cpp" />
+    <ClCompile Include="Geode.cpp" />
+    <ClCompile Include="Group.cpp" />
+    <ClCompile Include="Node.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Bunny.h" />
-    <ClInclude Include="..\Camera.h" />
-    <ClInclude Include="..\cube.h" />
-    <ClInclude Include="..\Dragon.h" />
-    <ClInclude Include="..\House.h" />
-    <ClInclude Include="..\main.h" />
-    <ClInclude Include="..\Matrix4.h" />
+    <ClInclude Include="Bunny.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="cube.h" />
+    <ClInclude Include="Dragon.h" />
+    <ClInclude Include=".\House.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="Matrix4.h" />
     <ClInclude Include="..\Model.h" />
-    <ClInclude Include="..\PointModel.h" />
-    <ClInclude Include="..\vector3.h" />
-    <ClInclude Include="..\Vector4.h" />
-    <ClInclude Include="..\Window.h" />
+    <ClInclude Include="PointModel.h" />
+    <ClInclude Include="vector3.h" />
+    <ClInclude Include="Vector4.h" />
+    <ClInclude Include="Window.h" />
+    <ClInclude Include="Geode.h" />
+    <ClInclude Include="Group.h" />
+    <ClInclude Include="Node.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

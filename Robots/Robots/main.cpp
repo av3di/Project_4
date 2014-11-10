@@ -14,11 +14,16 @@
 #include "House.h"
 #include "Bunny.h"
 #include "Dragon.h"
+#include "MatrixTransform.h"
+#include "Sphere.h"
 
 using namespace std;
 
 namespace Globals
 {
+	MatrixTransform root;
+	Cube shape;
+
   Cube cube;
   Camera cam1;
   Camera cam2;
@@ -63,40 +68,6 @@ int main(int argc, char *argv[])
   glutDisplayFunc(Window::displayCallback);
   glutReshapeFunc(Window::reshapeCallback);
   glutIdleFunc(Window::idleCallback);
-
-  // Initialize all matrices:
-  Globals::cube.getMatrix().identity();
-  Globals::cam1.getMatrix().identity();
-  Globals::cam2.getMatrix().identity();
-  Globals::h.getMatrix().identity();
-  Globals::hop.getMatrix().identity();
-  Globals::draco.getMatrix().identity();
-
-  // Parse the xyz files and store coords
-  Globals::hop.parseFile("bunny.xyz");
-  Globals::draco.parseFile("dragon.xyz");
-
-  // Translate and scale the point models
-  Globals::hop.moveToOrigin();
-  Globals::hop.fitToWindow();
-
-  Globals::draco.moveToOrigin();
-  Globals::draco.fitToWindow();
-
-  // Construct the F1 Camera
-  Globals::cam1.sete(0, 10, 10);
-  Globals::cam1.setd(0, 0, 0);
-  Globals::cam1.setup(0, 1, 0);
-  Globals::cam1.constructMatrix();
-  Globals::cam1.inverse();
-
-  // Construct the F2 Camera
-  Globals::cam2.sete(-15, 5, 10);
-  Globals::cam2.setd(-5, 0, 0);
-  Globals::cam2.setup(0, 1, 0.5);
-
-  Globals::cam2.constructMatrix();
-  Globals::cam2.inverse();
 
   // Process the keys pressed
   glutKeyboardFunc(Window::processNormalKeys);

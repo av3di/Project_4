@@ -6,9 +6,14 @@
 #include "House.h"
 #include "Bunny.h"
 #include "Dragon.h"
+#include "MatrixTransform.h"
+#include "Sphere.h"
 
 namespace Globals
 {
+	extern MatrixTransform root;
+	extern Cube shape;
+
     extern Cube cube;
 	extern Camera cam1;
 	extern Camera cam2;

@@ -73,8 +73,10 @@
     <ClCompile Include="House.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix4.cpp" />
+    <ClCompile Include="MatrixTransform.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="PointModel.cpp" />
+    <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="vector3.cpp" />
     <ClCompile Include="Vector4.cpp" />
     <ClCompile Include="window.cpp" />
@@ -91,7 +93,9 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="Matrix4.h" />
     <ClInclude Include="..\Model.h" />
+    <ClInclude Include="MatrixTransform.h" />
     <ClInclude Include="PointModel.h" />
+    <ClInclude Include="Sphere.h" />
     <ClInclude Include="vector3.h" />
     <ClInclude Include="Vector4.h" />
     <ClInclude Include="Window.h" />

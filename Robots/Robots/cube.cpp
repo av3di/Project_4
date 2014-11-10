@@ -9,6 +9,13 @@ Cube::Cube()
 {
 }
 
+void Cube::draw(Matrix4 &c)
+{
+	double size = 6;
+	glutSolidCube(size);
+}
+
+/*
 void Cube::draw()
 {
 	// Draw all six faces of the cube:
@@ -61,3 +68,4 @@ void Cube::draw()
 	glFlush();
 	glutSwapBuffers();
 }
+*/

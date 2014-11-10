@@ -2,15 +2,15 @@
 #define _CUBE_H_
 
 #include "Matrix4.h"
-#include "Model.h"
+#include "Geode.h"
 
 
-class Cube : public Model
+class Cube : public Geode
 {
   public:
 
     Cube();   // Constructor
-	virtual void draw();
+	virtual void draw(Matrix4 &c);
 };
 
 #endif

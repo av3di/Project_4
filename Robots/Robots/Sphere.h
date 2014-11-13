@@ -5,10 +5,17 @@
 
 class Sphere : public Geode
 {
+protected:
+	int radius;
+	int slices;
+	int stacks;
+	double red;
+	double green;
+	double blue;
 public:
-	Sphere();
+	Sphere(int, int, int, double, double, double);
 	~Sphere();
-	virtual void draw(Matrix4 &c);
+	virtual void render(Matrix4 &c);
 };
 
 #endif

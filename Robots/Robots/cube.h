@@ -7,10 +7,15 @@
 
 class Cube : public Geode
 {
+protected:
+	int size;
+	double red;
+	double green;
+	double blue;
   public:
 
-    Cube();   // Constructor
-	virtual void draw(Matrix4 &c);
+    Cube(int, double, double, double);   // Constructor
+	virtual void render(Matrix4 &c);
 };
 
 #endif

@@ -58,15 +58,9 @@ void Window::reshapeCallback(int w, int h)
 void Window::displayCallback()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glColor3d(1, 0, 0);
 
-	Matrix4 identity;
-	identity.identity();
+	Globals::root.draw(Globals::identity);
 
-	Globals::shape.setModelView(identity);
-	root.addChild(Globals::shape);
-
-	Globals::root.draw(identity);
 	glutSwapBuffers();
 }
 

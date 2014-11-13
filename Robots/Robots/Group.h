@@ -12,7 +12,7 @@ protected:
 public:
 	Group();
 	~Group();
-	void addChild(Node &tba);
+	void addChild(Node *tba);
 	void removeChild();
 	virtual void draw(Matrix4 &c);
 };

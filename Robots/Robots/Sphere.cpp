@@ -1,7 +1,7 @@
 #include "Sphere.h"
 
 
-Sphere::Sphere()
+Sphere::Sphere(int rad, int sl, int st, double r, double g, double b) : radius(rad), slices(sl), stacks(st), red(r), green(g), blue(b)
 {
 }
 
@@ -10,11 +10,8 @@ Sphere::~Sphere()
 {
 }
 
-void Sphere::draw(Matrix4 &c)
-{
-	double radius = 3;
-	int slices = 20;		// subdivisions around Z axis (longitude)
-	int stacks = 20;		// subdivisions along Z axis (latitude)
+void Sphere::render(Matrix4 &c)
+{	
+	glColor3d(red, green, blue);
 	glutSolidSphere(radius, slices, stacks);
-	//cout << "drawing solid sphere" << endl;
 }

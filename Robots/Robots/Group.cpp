@@ -10,9 +10,9 @@ Group::~Group()
 {
 }
 
-void Group::addChild(Node &tba)
+void Group::addChild(Node *tba)
 {
-	children.push_back(&tba);
+	children.push_back(tba);
 }
 
 void Group::removeChild()

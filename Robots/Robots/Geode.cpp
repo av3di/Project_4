@@ -18,16 +18,13 @@ Matrix4& Geode::getMatrix()
 
 void Geode::draw(Matrix4 &c)
 {
-	//setModelView(c);
-	//this->render(c);
+	setModelView(c);
+	this->render(c);
 }
 
 void Geode::setModelView(Matrix4 &c)
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);  // clear color and depth buffers
 	glMatrixMode(GL_MODELVIEW);  // make sure we're in Modelview mode
-
-	glEnable(GL_LIGHTING);
 	c.transpose();
 	glLoadMatrixd(c.getPointer());
 }

@@ -26,6 +26,8 @@ namespace Globals
 	extern MatrixTransform *right_arm_init_rotate;
 	extern MatrixTransform *right_arm_offset;
 
+	extern bool b_off; // bounding spheres off
+
 	extern double viewAngle;
 	extern int camZ;
 }

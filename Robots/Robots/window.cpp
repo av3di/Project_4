@@ -23,12 +23,10 @@ int Window::fkey = 1;  // If 1, show cube, 2->show 1st cam, 3->show 2nd cam
 // Callback method called when system is idle.
 void Window::idleCallback()
 {
-	//Globals::cube.spin(0.1);   // rotate cube; if it spins too fast try smaller values and vice versa
 	displayCallback();         // call display routine to show the cube
 }
 
 //----------------------------------------------------------------------------
-
 void Window::processSpecialKeys(int key, int x, int y)
 {/*
 	glMatrixMode(GL_MODELVIEW);  // make sure we're in Modelview mode
@@ -90,24 +88,27 @@ void Window::displayCallback()
 	Globals::right_arm_init_rotate->getIdentity();
 	Globals::right_arm_init_rotate->rotate(current_left_angle * -1);
 	Globals::right_arm_offset->translate(-2.0, 1.0, 0.0);
-
+	
 	glutSwapBuffers();
 }
 
 void Window::processNormalKeys(unsigned char key, int x, int y){
 	/*Model *currentM = &Globals::hop;
 	if (fkey == 1)
-		currentM = &Globals::hop;
+		currentM = &Globals::hop;*/
 	switch (key)
 	{
 	case 27:
 		exit(0);
 		break;
-	case 't':
-		currentM->changeCounter();
+	case 'b':
+		if (b_off)
+			b_off = false;
+		else
+			b_off = true;
 		break;
-	case 'x':
+/*	case 'x':
 		currentM->translate(-1.0, 0.0, 0.0);
-		break;
-	}*/
+		break;*/
+	}
 }

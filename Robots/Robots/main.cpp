@@ -36,6 +36,7 @@ namespace Globals
 	MatrixTransform *right_arm_init_rotate = new MatrixTransform();
 	MatrixTransform *right_arm_offset = new MatrixTransform();
 
+	bool b_off = true; // bounding spheres off
 	double viewAngle = 60.0;
 	int camZ = -20;
 };
@@ -119,35 +120,53 @@ int main(int argc, char *argv[])
 	Globals::right_leg_init_rotate->rotate(45);
 
 	//add head
+	Cube *head = new Cube(2, 1.0, 0.55, 0.0);
+	head->setMax(1, 1, 1);
+	head->setMin(-1, -1, -1);
 	Globals::root.addChild(b4_head);
-	b4_head->addChild(new Cube(2, 1.0, 0.55, 0.0));
+	b4_head->addChild(head);
 
 	// add torso
-	Globals::root.addChild(new Cube(3, 0.89, 0.96, 1));
+	Cube *torso = new Cube(3, 0.89, 0.96, 1);
+	torso->setMin(-1.5, -1.5, -1.5);
+	torso->setMax(1.5, 1.5, 1.5);
+	Globals::root.addChild(torso);
 	
 	// add right arm
+	Sphere *right_arm = new Sphere(1.0, 20, 20, 0, 0.50, 0.51);
+	right_arm->setMin(-1, -1, -1);
+	right_arm->setMax(1, 1, 1);
 	Globals::root.addChild(left_arm_init_pivot);
 	left_arm_init_pivot->addChild(Globals::left_arm_init_rotate);
 	Globals::left_arm_init_rotate->addChild(Globals::left_arm_offset);
-	Globals::left_arm_offset->addChild(new Sphere(1.0, 20, 20, 0, 0.98, 0.99));
+	Globals::left_arm_offset->addChild(right_arm);
 	
 	//add left arm
+	Sphere *left_arm = new Sphere(1.0, 20, 20, 0, 0.50, 0.51);
+	left_arm->setMax(1, 1, 1);
+	left_arm->setMin(-1, -1, -1);
 	Globals::root.addChild(right_arm_init_pivot);
 	right_arm_init_pivot->addChild(Globals::right_arm_init_rotate);
 	Globals::right_arm_init_rotate->addChild(Globals::right_arm_offset);
-	Globals::right_arm_offset->addChild(new Sphere(1.0, 20, 20, 0, 0.98, 0.99));
+	Globals::right_arm_offset->addChild(left_arm);
 
 	// add left leg
+	Cube *left_leg = new Cube(1.0, 1, 0.0, 0.0);
+	left_leg->setMax(0.5, 0.5, 0.5);
+	left_leg->setMin(-0.5, -0.5, -0.5);
 	Globals::root.addChild(left_leg_init_pivot);
 	left_leg_init_pivot->addChild(Globals::left_leg_init_rotate);
 	Globals::left_leg_init_rotate->addChild(Globals::left_leg_offset);
-	Globals::left_leg_offset->addChild(new Cube(1.0, 1, 0.0, 0.0));
+	Globals::left_leg_offset->addChild(left_leg);
 
 	// add right leg
+	Cube *right_leg = new Cube(1.0, 1, 0.0, 0.0);
+	right_leg->setMax(0.5, 0.5, 0.5);
+	right_leg->setMin(-0.5, -0.5, -0.5);
 	Globals::root.addChild(right_leg_init_pivot); 
 	right_leg_init_pivot->addChild(Globals::right_leg_init_rotate);
 	Globals::right_leg_init_rotate->addChild(Globals::right_leg_offset);
-	Globals::right_leg_offset->addChild(new Cube(1.0, 1, 0.0, 0.0));
+	Globals::right_leg_offset->addChild(right_leg);
 	
 	// Process the keys pressed
 	glutKeyboardFunc(Window::processNormalKeys);

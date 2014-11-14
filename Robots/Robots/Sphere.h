@@ -16,6 +16,7 @@ public:
 	Sphere(int, int, int, double, double, double);
 	~Sphere();
 	virtual void render(Matrix4 &c);
+	virtual void update();
 };
 
 #endif

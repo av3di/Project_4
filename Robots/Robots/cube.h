@@ -16,6 +16,7 @@ protected:
 
     Cube(int, double, double, double);   // Constructor
 	virtual void render(Matrix4 &c);
+	virtual void update();
 };
 
 #endif

@@ -10,7 +10,7 @@ class Node
 {
 protected:
 	double bs_radius; //bounding sphere radius
-	Vector4 bounding_sphere; // bounding sphere center point
+	Vector3 bounding_sphere; // bounding sphere center point
 	double min_y;
 	double min_x;
 	double min_z;
@@ -23,8 +23,8 @@ protected:
 public:
 	Node();
 	~Node();
-	virtual void draw(Matrix4 &c);
-	virtual void update();
+	virtual void draw(Matrix4 &c, Matrix4 &option);
+	virtual bool update(Matrix4 &c);
 	void setMin(double, double, double); // set min values x, y, z
 	void setMax(double, double, double); // set max values x, y, z
 };

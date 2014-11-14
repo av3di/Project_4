@@ -15,8 +15,8 @@ protected:
 public:
 	Sphere(int, int, int, double, double, double);
 	~Sphere();
-	virtual void render(Matrix4 &c);
-	virtual void update();
+	virtual void render(Matrix4 &c, Matrix4 &option);
+	virtual bool update(Matrix4 &c, Matrix4 &option);
 };
 
 #endif

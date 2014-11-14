@@ -16,10 +16,10 @@ Matrix4& Geode::getMatrix()
 	return model2world;
 }
 
-void Geode::draw(Matrix4 &c)
+void Geode::draw(Matrix4 &c, Matrix4 &option)
 {
 	setModelView(c);
-	this->render(c);
+	this->render(c, option);
 }
 
 void Geode::setModelView(Matrix4 &c)
@@ -29,7 +29,7 @@ void Geode::setModelView(Matrix4 &c)
 	glLoadMatrixd(c.getPointer());
 }
 
-void Geode::render(Matrix4 &c)
+void Geode::render(Matrix4 &c, Matrix4 &option)
 {
 
 }

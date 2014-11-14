@@ -23,13 +23,13 @@ void Group::removeChild()
 	}
 }
 
-void Group::draw(Matrix4 &c)
+void Group::draw(Matrix4 &c, Matrix4 &option)
 {
 	Node *child;
 
 	for (std::list<Node*>::iterator it = children.begin(); it != children.end(); it++)
 	{
 		child = *it; 
-		child->draw(c);
+		child->draw(c, option);
 	}
 }

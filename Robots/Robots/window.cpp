@@ -67,7 +67,7 @@ void Window::displayCallback()
 
 	current_left_angle += turn;
 
-	Globals::root.draw(Globals::identity);
+	Globals::root.draw(Globals::identity, Globals::identity);
 
 	Globals::left_leg_offset->translate(1.0, 1.5, 0.0);
 	Globals::left_leg_init_rotate->getIdentity();

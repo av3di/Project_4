@@ -36,6 +36,19 @@ namespace Globals
 	MatrixTransform *right_arm_init_rotate = new MatrixTransform();
 	MatrixTransform *right_arm_offset = new MatrixTransform();
 
+	Vector3 near_normal;
+	Vector3 near_point;
+	Vector3 far_normal;
+	Vector3 far_point;
+	Vector3 right_normal;
+	Vector3 right_point;
+	Vector3 left_normal;
+	Vector3 left_point;
+	Vector3 top_normal;
+	Vector3 top_point;
+	Vector3 bottom_normal;
+	Vector3 bottom_point;
+
 	bool b_off = true; // bounding spheres off
 	double viewAngle = 60.0;
 	int camZ = -20;
@@ -76,7 +89,132 @@ int main(int argc, char *argv[])
 	glutReshapeFunc(Window::reshapeCallback);
 	glutIdleFunc(Window::idleCallback);
 
-  
+	// View Frustum Calculations from Lighthouse3D site
+	// find d and p and up
+	Vector3 d;
+	Vector3 p;
+	Vector3 up;
+	d.setX(0); d.setY(0); d.setZ(0); // Look at point
+	p.setX(0); p.setY(0); p.setZ(-20); // Camera position
+	up.setX(0); up.setY(1); up.setZ(0); // Up vector
+
+
+	// Calculate X Y Z axis
+	Vector3 X;
+	Vector3 Y;
+	Vector3 Z;
+	Z = p - d;
+	X = up.cross(Z);
+	X.normalize();
+	Y = Z.cross(X);
+
+	// Find height and width of far plane of view frustum
+	double Hfar = 0.0;
+	double Wfar = 0.0;
+
+	double farDist = 25; // distance of far plane from camera
+
+	double radians = ((Globals::viewAngle / 2.0) * M_PI) / 180.0;
+	Hfar = (tan(radians) * farDist);
+	Wfar = Hfar * (Window::width / Window::height);
+
+	double nearDist = 15.0; // Distance to near plane from Camera
+
+	// Find height and width of near plane
+	double Hnear = (tan(radians) * nearDist);
+	double Wnear = Hnear * (Window::width / Window::height);
+
+	// Find center point of near and far planes
+	Z.scale(nearDist);
+	Vector3 nc = p - Z;
+	Z = p - d; // Reset Z
+	Vector3 fc;
+	Z.scale(farDist);
+	fc = p - Z;
+	Z = p - d; // Reset Z
+
+
+	// Compute 4 corners of the frustum on near plane
+	Y.scale(Hnear);
+	X.scale(Wnear);
+
+	Vector3 ntl = nc + Y - X;
+	Vector3 ntr = nc + Y + X;
+	Vector3 nbl = nc - Y - X;
+	Vector3 nbr = nc - Y + X;
+
+	// Reset X Y Z 
+	Z = p - d;
+	X = up.cross(Z);
+	X.normalize();
+	Y = Z.cross(X);
+
+	// Find 4 corners of far plane
+	Y.scale(Hfar);
+	X.scale(Wfar);
+	Vector3 ftl = fc + Y - X;
+	Vector3 ftr = fc + Y + X;
+	Vector3 fbl = fc - Y - X;
+	Vector3 fbr = fc - Y + X;
+
+
+	// Find points and normals for all planes
+	// Reset X Y Z 
+	Z = p - d;
+	X = up.cross(Z);
+	X.normalize();
+	Y = Z.cross(X);
+	// Find points and normals for near and far plane
+
+	Globals::near_normal.setX(Z.getX() * -1); Globals::near_normal.setY(Z.getY()* -1); Globals::near_normal.setZ(Z.getZ()* -1);
+	Globals::near_point.setX(nc.getX()); Globals::near_point.setY(nc.getY()); Globals::near_point.setZ(nc.getZ());
+
+
+	Globals::far_normal.setX(Z.getX()); Globals::far_normal.setY(Z.getY()); Globals::far_normal.setZ(Z.getZ());
+	Globals::far_point.setX(fc.getX()); Globals::far_point.setY(fc.getY()); Globals::far_point.setZ(fc.getZ());
+
+	// Find points and normals for right and left plane
+
+
+	X.scale(Wnear);
+	using namespace Globals;
+	right_normal = nc + X;
+	right_normal = right_normal - p;
+	right_normal.normalize();
+	right_normal = Y.cross(right_normal);
+	right_point = nc + X;
+
+
+	left_normal = nc - X;
+	left_normal = left_normal - p;
+	left_normal.normalize();
+	left_normal = left_normal.cross(Y);
+	left_point = nc - X;
+
+	// Find points and normals for top and bottom plane
+	// Reset X Z 
+	Z = p - d;
+	X = up.cross(Z);
+	X.normalize();
+
+	Y.scale(Hnear);
+
+
+	top_normal = nc + Y;
+	top_normal = top_normal - p;
+	top_normal.normalize();
+	top_normal = top_normal.cross(X);
+	top_point = nc + Y;
+
+
+	bottom_normal = nc - Y;
+	bottom_normal = bottom_normal - p;
+	bottom_normal.normalize();
+	bottom_normal = X.cross(bottom_normal);
+	bottom_point = nc - Y;
+
+
+	// Prepare Robot
 	Globals::identity.identity();
 
 	MatrixTransform *b4_head = new MatrixTransform();

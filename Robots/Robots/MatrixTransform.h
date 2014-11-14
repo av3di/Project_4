@@ -15,7 +15,7 @@ public:
 	void translate(double x, double y, double z);
 	void MatrixTransform::rotate(double a);
 	void walk();
-	virtual void draw(Matrix4 &c);
+	virtual void draw(Matrix4 &c, Matrix4 &option);
 };
 
 #endif

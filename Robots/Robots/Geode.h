@@ -12,8 +12,8 @@ public:
 	~Geode();
 	Matrix4& getMatrix();
 	void setModelView(Matrix4 &);
-	void draw(Matrix4 &);
-	virtual void render(Matrix4 &);
+	void draw(Matrix4 &c, Matrix4 &option);
+	virtual void render(Matrix4 &c, Matrix4 &option);
 };
 
 #endif

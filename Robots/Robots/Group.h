@@ -14,7 +14,7 @@ public:
 	~Group();
 	void addChild(Node *tba);
 	void removeChild();
-	virtual void draw(Matrix4 &c);
+	virtual void draw(Matrix4 &c, Matrix4 &option);
 };
 
 #endif

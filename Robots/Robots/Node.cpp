@@ -11,40 +11,14 @@ Node::~Node()
 }
 
 
-void Node::draw(Matrix4 &c)
+void Node::draw(Matrix4 &c, Matrix4 &option)
 {
 
 }
 
-void Node::update()
+bool Node::update(Matrix4 &c)
 {
-	// Find center of bounding sphere
-	double midx = (min_x + max_x) / 2.0;
-	double midy = (min_y + max_y) / 2.0;
-	double midz = (min_z + max_z) / 2.0;
-
-	bounding_sphere.setX(midx);
-	bounding_sphere.setY(midy);
-	bounding_sphere.setZ(midz);
-	bounding_sphere.setW(1);
-
-	// Find radius of bounding sphere
-	
-	double diameter = 1.0;
-	if (max_x - min_x >= max_y - min_y)
-		diameter = max_x - min_x;
-	else
-		diameter = max_y - min_y;
-	//cout << "diameter is:" << diameter << endl;
-	//getchar();
-	bs_radius = diameter / 2.0;
-	
-	glColor3d(1, 1, 1);
-	if (bs_radius < 1)
-		bs_radius = 1;
-	
-	cout << "radius: " << bs_radius << endl;
-	glutWireSphere(bs_radius+ 1, 10, 10);
+	return true;
 }
 
 void Node::setMin(double x, double y, double z)

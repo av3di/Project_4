@@ -24,10 +24,11 @@ void MatrixTransform::translate(double x, double y, double z)
 }
 
 
-void MatrixTransform::draw(Matrix4 &c)
+void MatrixTransform::draw(Matrix4 &c, Matrix4 &option)
 {
 	Matrix4 c_new = c * m;
-	Group::draw(c_new);
+	
+	Group::draw(c_new, m);
 }
 
 void MatrixTransform::rotate(double a)
@@ -41,3 +42,5 @@ void MatrixTransform::getIdentity()
 {
 	m.identity();
 }
+
+

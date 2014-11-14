@@ -65,11 +65,11 @@ Vector4 Matrix4::operator*(const Vector4& v){
 }
 
 void Matrix4::makeRotateX(double angle){
-	angle /= 180 * M_PI;
+	angle = (angle * M_PI) / 180;
 	identity();
 	m[1][1] = cos(angle);
-	m[1][2] = -sin(angle);
-	m[2][1] = sin(angle);
+	m[1][2] = sin(angle);
+	m[2][1] = -sin(angle);
 	m[2][2] = cos(angle);
 }
 

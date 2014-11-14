@@ -24,6 +24,18 @@ namespace Globals
 	MatrixTransform root;
 	Matrix4 identity;
 
+	MatrixTransform *left_leg_offset = new MatrixTransform();
+	MatrixTransform *left_leg_init_rotate = new MatrixTransform();
+
+	MatrixTransform *right_leg_init_rotate = new MatrixTransform();
+	MatrixTransform *right_leg_offset = new MatrixTransform();
+
+	MatrixTransform *left_arm_offset = new MatrixTransform();
+	MatrixTransform *left_arm_init_rotate = new MatrixTransform();
+
+	MatrixTransform *right_arm_init_rotate = new MatrixTransform();
+	MatrixTransform *right_arm_offset = new MatrixTransform();
+
 	double viewAngle = 60.0;
 	int camZ = -20;
 };
@@ -71,29 +83,40 @@ int main(int argc, char *argv[])
 	b4_head->translate(0, 2.5, 0);
 
 
-	MatrixTransform *left_arm_offset = new MatrixTransform();
-	left_arm_offset->getIdentity();
-	left_arm_offset->translate(2, 0, 0);
+	Globals::left_arm_offset->getIdentity();
+	Globals::left_arm_offset->translate(2, 1, 0);
 
-	MatrixTransform *right_arm_offset = new MatrixTransform();
-	right_arm_offset->getIdentity();
-	right_arm_offset->translate(-2, 0, 0);
+	MatrixTransform *left_arm_init_pivot = new MatrixTransform();
+	left_arm_init_pivot->translate(0.0, -1.0, 0.0);
+	Globals::left_arm_init_rotate->getIdentity();
+	Globals::left_arm_init_rotate->rotate(-45);
 
-	MatrixTransform *left_leg_offset = new MatrixTransform();
-	left_leg_offset->getIdentity();
-	left_leg_offset->translate(-1.0, -2.0, 0);
 
-	MatrixTransform *left_leg_init_rotate = new MatrixTransform();
-	left_leg_init_rotate->getIdentity();
-	left_leg_init_rotate->rotate(-45);
+	Globals::right_arm_offset->getIdentity();
+	Globals::right_arm_offset->translate(-2, 1, 0);
 
-	MatrixTransform *right_leg_offset = new MatrixTransform();
-	right_leg_offset->getIdentity();
-	right_leg_offset->translate(1.0, -2.0, 0);
+	MatrixTransform *right_arm_init_pivot = new MatrixTransform();
+	right_arm_init_pivot->translate(0.0, -1.0, 0.0);
+	Globals::right_arm_init_rotate->getIdentity();
+	Globals::right_arm_init_rotate->rotate(45);
 
-	MatrixTransform *right_leg_init_rotate = new MatrixTransform();
-	right_leg_init_rotate->getIdentity();
-	right_leg_init_rotate->rotate(45);
+	
+	Globals::left_leg_offset->getIdentity();
+	Globals::left_leg_offset->translate(-1.0, -1.5, 0);
+	MatrixTransform *left_leg_init_pivot = new MatrixTransform();
+	left_leg_init_pivot->translate(0.0, -0.5, 0.0);
+
+	Globals::left_leg_init_rotate->getIdentity();
+	Globals::left_leg_init_rotate->rotate(-45);
+
+
+	Globals::right_leg_offset->getIdentity();
+	Globals::right_leg_offset->translate(1.0, -1.5, 0);
+	MatrixTransform *right_leg_init_pivot = new MatrixTransform();
+	right_leg_init_pivot->translate(0.0, -0.5, 0.0);
+
+	Globals::right_leg_init_rotate->getIdentity();
+	Globals::right_leg_init_rotate->rotate(45);
 
 	//add head
 	Globals::root.addChild(b4_head);
@@ -103,22 +126,28 @@ int main(int argc, char *argv[])
 	Globals::root.addChild(new Cube(3, 0.89, 0.96, 1));
 	
 	// add right arm
-	Globals::root.addChild(left_arm_offset);
-	left_arm_offset->addChild(new Sphere(1.0, 20, 20, 0, 0.98, 0.99));
+	Globals::root.addChild(left_arm_init_pivot);
+	left_arm_init_pivot->addChild(Globals::left_arm_init_rotate);
+	Globals::left_arm_init_rotate->addChild(Globals::left_arm_offset);
+	Globals::left_arm_offset->addChild(new Sphere(1.0, 20, 20, 0, 0.98, 0.99));
 	
 	//add left arm
-	Globals::root.addChild(right_arm_offset);
-	right_arm_offset->addChild(new Sphere(1.0, 20, 20, 0, 0.98, 0.99));
+	Globals::root.addChild(right_arm_init_pivot);
+	right_arm_init_pivot->addChild(Globals::right_arm_init_rotate);
+	Globals::right_arm_init_rotate->addChild(Globals::right_arm_offset);
+	Globals::right_arm_offset->addChild(new Sphere(1.0, 20, 20, 0, 0.98, 0.99));
 
 	// add left leg
-	Globals::root.addChild(left_leg_init_rotate);
-	left_leg_init_rotate->addChild(left_leg_offset);
-	left_leg_offset->addChild(new Cube(1.0, 1, 0.0, 0.0));
+	Globals::root.addChild(left_leg_init_pivot);
+	left_leg_init_pivot->addChild(Globals::left_leg_init_rotate);
+	Globals::left_leg_init_rotate->addChild(Globals::left_leg_offset);
+	Globals::left_leg_offset->addChild(new Cube(1.0, 1, 0.0, 0.0));
 
 	// add right leg
-	Globals::root.addChild(right_leg_init_rotate);
-	right_leg_init_rotate->addChild(right_leg_offset);
-	right_leg_offset->addChild(new Cube(1.0, 1, 0.0, 0.0));
+	Globals::root.addChild(right_leg_init_pivot); 
+	right_leg_init_pivot->addChild(Globals::right_leg_init_rotate);
+	Globals::right_leg_init_rotate->addChild(Globals::right_leg_offset);
+	Globals::right_leg_offset->addChild(new Cube(1.0, 1, 0.0, 0.0));
 	
 	// Process the keys pressed
 	glutKeyboardFunc(Window::processNormalKeys);
